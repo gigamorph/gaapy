@@ -1,0 +1,7 @@
+*~
+*.pyc
+client_secrets.json
+api-token.dat
+config.json
+/params/*.conf
+

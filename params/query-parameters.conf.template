@@ -1,0 +1,4 @@
+profile_id=${google_analytics_profile_id}  #e.g. 1234567
+filters=${filters}  #e.g. ga:hostname=example.com
+dimensions=${dimensions}  #e.g. ga:hostname,ga:pagePath
+metrics=${metrics}  #e.g. ga:visits

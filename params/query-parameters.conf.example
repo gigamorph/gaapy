@@ -1,0 +1,4 @@
+profile_id=1234567 #Profile ID
+filters=ga:hostname==portal.yale.edu
+dimensions=ga:pagePath
+metrics=ga:visits
