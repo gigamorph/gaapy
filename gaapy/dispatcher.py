@@ -11,6 +11,7 @@ sys.path.append(APP_ROOT)
 
 import argparse
 import json
+import logging
 import re
 
 from oauth2client.tools import argparser
@@ -40,13 +41,14 @@ class Dispatcher(object):
         params = dict()
         with open(fpath, 'r') as f:
             for line in f:
-                m = re.match(r'\s*(\S+?)\s*=\s*([^\s#]+)', line)
+                line2 = re.sub(r'^([^#]*)#.*$', r'\1', line) #remove comment
+                m = re.match(r'\s*(\S+?)\s*=\s*(\S+)', line2)
                 if m:
                     key = m.group(1)
                     value = m.group(2)
                     params[key] = value
-                else:
-                    'Invalid line: [%s]' % line
+                elif line2.strip() != '': #not a pure comment line nor an empty line
+                    logging.warning('Invalid line: %s' % line)
         return params
         
     def run(self):
