@@ -20,7 +20,7 @@ from ga_proxy.google_auth import GoogleAuth
 from ga_proxy.report_api import ReportAPI 
 
 
-class Dispatcher(object):
+class Reporter(object):
 
     def __init__(self, args):
         self.app_root = APP_ROOT
@@ -76,5 +76,5 @@ if __name__ == '__main__':
      
     args = parser.parse_args(sys.argv[1:])
      
-    dispatcher = Dispatcher(args)
-    dispatcher.run()
+    reporter = Reporter(args)
+    reporter.run()
