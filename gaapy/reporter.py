@@ -2,10 +2,8 @@
 """
 
 import os
-import os.path
 import sys
 
-#APP_ROOT = os.path.dirname(os.path.realpath(__file__))
 APP_ROOT = os.environ['GAAPY_HOME']
 sys.path.append(APP_ROOT)
 
@@ -16,21 +14,15 @@ import re
 
 from oauth2client.tools import argparser
 
-from ga_proxy.google_auth import GoogleAuth
 from ga_proxy.report_api import ReportAPI 
+from gaapy.config import Config
 
 
 class Reporter(object):
 
     def __init__(self, args):
-        self.app_root = APP_ROOT
         self.args = args
         
-    def get_config(self):
-        with open(os.path.join(self.app_root, 'config', 'config.json')) as f:
-            config = json.loads(f.read())
-        return config
-
     def get_query_params(self):
         """Each line looks like
         key = value
@@ -52,11 +44,9 @@ class Reporter(object):
         return params
         
     def run(self):
-        config = self.get_config()
-        client_secrets_path = os.path.join(self.app_root, config['client_secrets_path'])
-        token_path = os.path.join(self.app_root, config['token_path'])
-        auth = GoogleAuth(self.args, client_secrets_path, token_path)
-        service = auth.build_service('analytics', 'v3') 
+        config = Config()
+        service = config.get_service(self.args)
+         
         reporter = ReportAPI(service)
                 
         params = self.get_query_params()
