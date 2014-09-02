@@ -10,4 +10,5 @@ class ReportAPI(object):
             end_date=params['end'],
             filters=params.get('filters'),
             dimensions=params.get('dimensions'),
-            metrics=params.get('metrics')).execute()
+            metrics=params.get('metrics'),
+            max_results=params.get('max-results')).execute()
