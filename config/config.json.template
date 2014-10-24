@@ -1,4 +1,4 @@
 {
-  "client_secrets_file" : "/some/safe/place/client_secrets.json",
+  "client_secrets_path" : "/some/safe/place/client_secrets.json",
   "token_file" : "/some/safe/place/analytics.dat"
 }
